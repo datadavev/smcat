@@ -1,0 +1,2 @@
+# smcat
+Sitemap cat
