@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ds03</title>
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org/",
+            "@type": "Dataset",
+            "name": "ds03",
+            "description": "Test case schema.org Dataset 03",
+            "isAccessibleForFree": true,
+            "keywords": ["test","Dataset"],
+            "identifier": "smcat.test.ds03"
+        }
+    </script>
+
+</head>
+<body>
+<p>JSON-LD in this document:</p>
+<pre id="jsonld"></pre>
+<script>
+    let meta = JSON.parse(document.querySelector('script[type="application/ld+json"]').innerText);
+    document.getElementById("jsonld").innerText = JSON.stringify(meta, null, 2);
+</script>
+</body>
+</html>

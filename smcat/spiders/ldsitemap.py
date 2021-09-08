@@ -67,6 +67,9 @@ class LdsitemapSpider(scrapy.Spider):
             self.sitemap_urls = urls.split(" ")
         # If set, then don't download the target
         self._count_only = kw.get("count_only", False)
+        # _item_memory is a hack used for testing only. It is set to an
+        # instance of pipelines.ItemMemoryPipeline when that pipline is used
+        self._item_memory = None
 
     @classmethod
     def from_crawler(cls, crawler, *args, **kwargs):

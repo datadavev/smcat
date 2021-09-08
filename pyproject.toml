@@ -10,10 +10,12 @@ python = "^3.9"
 Scrapy = "^2.5.0"
 ciso8601 = "^2.2.0"
 requests = "^2.26.0"
+asyncio = "^3.4.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.5"
 coverage = "^5.5"
+pytest-twisted = "^1.13.4"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

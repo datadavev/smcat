@@ -1,0 +1,9 @@
+{
+    "@context": "https://schema.org/",
+    "@type": "Dataset",
+    "name": "ds01",
+    "description": "Test case schema.org Dataset 01",
+    "isAccessibleForFree": true,
+    "keywords": ["test","Dataset"],
+    "identifier": "smcat.test.ds01"
+}

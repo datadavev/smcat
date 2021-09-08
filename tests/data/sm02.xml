@@ -1,0 +1,21 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:html="http://www.w3.org/1999/xhtml"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd
+        http://www.w3.org/1999/xhtml
+        http://www.w3.org/2002/08/xhtml/xhtml1-strict.xsd">
+<url>
+    <loc>http://127.0.0.1:8001/content/ds01.html</loc>
+    <lastmod>2019-09-23T13:46:37+01:00</lastmod>
+    <html:link rel="alternate" type="application/ld+json" profile="http://schema.org/" href="http://127.0.0.1:8001/content/ds01.jsonld"/>
+</url>
+<url>
+    <loc>http://127.0.0.1:8001/content/ds02.html</loc>
+    <lastmod>2019-09-23T13:46:31+01:00</lastmod>
+</url>
+<url>
+    <loc>http://127.0.0.1:8001/content/ds03.html</loc>
+    <lastmod>2019-09-23T13:46:25+01:00</lastmod>
+</url>
+</urlset>
