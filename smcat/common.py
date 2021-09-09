@@ -56,7 +56,10 @@ def parseDatetimeString(ds):
             dt = email.utils.parsedate_to_datetime(ds)
         except TypeError as e:
             pass
-    if ds.lower() in ["now","instant",]:
+    if ds.lower() in [
+        "now",
+        "instant",
+    ]:
         dt = dtnow()
 
     return dt
