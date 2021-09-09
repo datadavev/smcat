@@ -24,6 +24,24 @@ FEEDS = {
     }
 }
 
+# List of (regex, callback) that are applied to each url
+# found in the sitemap
+# If the callback is a string, then it must be a method of the
+# spider class. Otherwise, the callback is a method called
+# callbacks have a signature like: parse(self, response, **kwargs):
+SITEMAP_RULES = [
+    ("", "parse"),
+]
+
+SITEMAP_X_RULES = [
+    {
+        "r": None,
+        "content_type": None,
+        "profile": None,
+        "cb": "nopParse"
+    }
+]
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'smcat (+http://www.yourdomain.com)'
 

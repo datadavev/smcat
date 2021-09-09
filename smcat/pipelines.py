@@ -22,6 +22,8 @@ class ItemMemoryPipeline:
         self.ids_seen = set()
 
     def open_spider(self,spider):
+        # hack to make this collection of items available from the spider
+        # used for testing purposes.
         spider._item_memory = self
         self.items = []
 
@@ -31,4 +33,11 @@ class ItemMemoryPipeline:
     def process_item(self, item, spider):
         self.items.append(item)
         return item
+
+    def kinds(self, kind):
+        res = []
+        for i in self.items:
+            if i.get('kind', '') == kind:
+                res.append(i)
+        return res
 

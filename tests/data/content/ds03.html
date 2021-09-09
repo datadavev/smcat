@@ -14,14 +14,13 @@
             "identifier": "smcat.test.ds03"
         }
     </script>
-
+    <script src="common.js"></script>
 </head>
 <body>
 <p>JSON-LD in this document:</p>
 <pre id="jsonld"></pre>
 <script>
-    let meta = JSON.parse(document.querySelector('script[type="application/ld+json"]').innerText);
-    document.getElementById("jsonld").innerText = JSON.stringify(meta, null, 2);
+    addMetadata();
 </script>
 </body>
 </html>

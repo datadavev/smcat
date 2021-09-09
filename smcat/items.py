@@ -21,8 +21,11 @@ class DocumentItem(scrapy.Item):
         time_mod: Timestamp reported in HTTP response Last-Modified header, if available
 
     """
+
+    id = scrapy.Field()
     kind = scrapy.Field()
     time_retrieved = scrapy.Field(serializer=serializeDateTime)
+    from_item = scrapy.Field()
     source = scrapy.Field()
     url = scrapy.Field()
     time_mod = scrapy.Field(serializer=serializeDateTime)
@@ -30,6 +33,7 @@ class DocumentItem(scrapy.Item):
     def __init__(self):
         super().__init__()
         self.set(kind=self.name())
+        self.set(id=smcat.common.getId())
 
     def setV(self, k, v, allow_none=False):
         if v is None and not allow_none:
@@ -37,15 +41,13 @@ class DocumentItem(scrapy.Item):
         self[k] = v
 
     def set(self, allow_none=False, **kwargs):
-        for k,v in kwargs.items():
+        for k, v in kwargs.items():
             if v is None and not allow_none:
                 continue
             self[k] = v
 
     def name(self):
         return self.__class__.__name__
-
-
 
 
 class RobotstxtItem(DocumentItem):
@@ -81,3 +83,10 @@ class SitemaplocItem(DocumentItem):
     link_profile = scrapy.Field()
     changefreq = scrapy.Field()
     priority = scrapy.Field()
+
+
+class JsonldItem(DocumentItem):
+    # Time taken to retrieve the JsonLD, ms
+    elapsed = scrapy.Field()
+    # JsonLD content retrieved from a URL
+    jsonld = scrapy.Field()

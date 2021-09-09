@@ -3,24 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>ds01</title>
-    <script type="application/ld+json">
-        {
-            "@context": "https://schema.org/",
-            "@type": "Dataset",
-            "name": "ds01",
-            "description": "Test case schema.org Dataset 01",
-            "isAccessibleForFree": true,
-            "keywords": ["test","Dataset"],
-            "identifier": "smcat.test.ds01"
-        }
-    </script>
+    <link href="ds01.jsonld" rel="alternate" type="application/ld+json" />
+    <script src="common.js"></script>
 </head>
 <body>
 <p>JSON-LD in this document:</p>
 <pre id="jsonld"></pre>
+<pre id="errors"></pre>
 <script>
-    let meta = JSON.parse(document.querySelector('script[type="application/ld+json"]').innerText);
-    document.getElementById("jsonld").innerText = JSON.stringify(meta, null, 2);
+    addMetadata();
 </script>
 </body>
 </html>
