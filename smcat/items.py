@@ -14,6 +14,7 @@ def serializeDateTime(dt):
 class DocumentItem(scrapy.Item):
     """
     Attributes:
+        id: A unique identifier for this item. Not idempotent with subsequent harvests.
         kind: type name of this item
         time_retrieved: When the item was generated
         source: URL of the document leading to this item
@@ -24,8 +25,8 @@ class DocumentItem(scrapy.Item):
 
     id = scrapy.Field()
     kind = scrapy.Field()
-    time_retrieved = scrapy.Field(serializer=serializeDateTime)
     from_item = scrapy.Field()
+    time_retrieved = scrapy.Field(serializer=serializeDateTime)
     source = scrapy.Field()
     url = scrapy.Field()
     time_mod = scrapy.Field(serializer=serializeDateTime)
@@ -68,7 +69,7 @@ class SitemapItem(DocumentItem):
 
 class SitemaplocItem(DocumentItem):
     """
-    Properties of a document found by navigating from a sitemap loc entry.
+    Properties of a document identified by a sitemap loc entry.
 
     Attributes:
         time_loc: Timestamp in sitemap lastmod value, if available
@@ -86,7 +87,5 @@ class SitemaplocItem(DocumentItem):
 
 
 class JsonldItem(DocumentItem):
-    # Time taken to retrieve the JsonLD, ms
-    elapsed = scrapy.Field()
     # JsonLD content retrieved from a URL
-    jsonld = scrapy.Field()
+    data = scrapy.Field()

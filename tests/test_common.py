@@ -18,46 +18,66 @@ date_cases = [
     ],
     [
         "Sun, 06 Nov 1994 08:49:37 GMT",
-        datetime.datetime(1994, 11, 6, 8, 49, 37, tzinfo=datetime.timezone.utc)
+        datetime.datetime(1994, 11, 6, 8, 49, 37, tzinfo=datetime.timezone.utc),
     ],
-    [
-        "today",
-        None
-    ]
+    ["today", None],
 ]
 
 content_type_cases = [
-    [
-        "text/plain",
-        ("text/plain", None)
-    ],
-    [
-        "text/plain; charset=UTF-8",
-        ("text/plain", "UTF-8")
-    ],
-    [
-        "text/html; charset=UTF-8",
-        ("text/html", "UTF-8")
-    ],
-    [
-        " text/html; charset=ISO-8859-4 ",
-        ("text/html", "ISO-8859-4")
-    ],
+    ["text/plain", ("text/plain", None)],
+    ["text/plain; charset=UTF-8", ("text/plain", "UTF-8")],
+    ["text/html; charset=UTF-8", ("text/html", "UTF-8")],
+    [" text/html; charset=ISO-8859-4 ", ("text/html", "ISO-8859-4")],
     [
         "type/x.subtype+suffix;parameter; charset=UTF-8",
-        ("type/x.subtype+suffix;parameter", "UTF-8")
+        ("type/x.subtype+suffix;parameter", "UTF-8"),
     ],
 ]
 
 media_type_cases = [
-    ["text/plain", ["text",]],
-    ["text/html", ["html",]],
-    ["application/xhtml+xml", ["html",]],
+    [
+        "text/plain",
+        [
+            "text",
+        ],
+    ],
+    [
+        "text/html",
+        [
+            "html",
+        ],
+    ],
+    [
+        "application/xhtml+xml",
+        [
+            "html",
+        ],
+    ],
     ["application/octet-stream", []],
-    ["text/strings", ["text",]],
+    [
+        "text/strings",
+        [
+            "text",
+        ],
+    ],
     ["text/json", []],
     ["application/json", ["json", "jsonld"]],
     ["application/ld+json", ["json", "jsonld"]],
+]
+
+bool_test_cases = [
+    (True, True),
+    (False, False),
+    ("ok", True),
+    ("true", True),
+    ("yes", True),
+    ("YES", True),
+    (1, True),
+    ("1", True),
+    ("999", True),
+    ("no", False),
+    ("0", False),
+    ("False", False),
 ]
 
 
@@ -80,3 +100,8 @@ def test_isMediaKind(mt, expected):
     assert len(res) == len(expected)
     for v in res:
         assert v in expected
+
+
+@pytest.mark.parametrize("v,expected", bool_test_cases)
+def test_asbool(v, expected):
+    assert smcat.common.asbool(v) == expected

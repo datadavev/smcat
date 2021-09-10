@@ -17,6 +17,7 @@ TEST_HOME = pathlib.Path(globals().get("__file__", "./_")).absolute().parent / "
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=TEST_HOME, **kwargs)
+        self.extensions_map[".jsonld"] = "application/ld+json"
 
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)

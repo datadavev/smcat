@@ -24,32 +24,26 @@ FEEDS = {
     }
 }
 
-# List of (regex, callback) that are applied to each url
-# found in the sitemap
+# List of (regex, callback) that are applied to each loc URL
+# found in the sitemap.
+#
 # If the callback is a string, then it must be a method of the
 # spider class. Otherwise, the callback is a method called
 # callbacks have a signature like: parse(self, response, **kwargs):
+#
+# The rule ("", "parse") sends everything to LdsitemapSpider.parse()
 SITEMAP_RULES = [
     ("", "parse"),
 ]
 
-SITEMAP_X_RULES = [
-    {
-        "r": None,
-        "content_type": None,
-        "profile": None,
-        "cb": "nopParse"
-    }
-]
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'smcat (+http://www.yourdomain.com)'
+USER_AGENT = 'smcat (+http://datadavev.github.io/smcat)'
 
 # Obey robots.txt rules
-#ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-#CONCURRENT_REQUESTS = 32
+CONCURRENT_REQUESTS = 16
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay

@@ -18,14 +18,39 @@ JSONLD_MEDIA = re.compile(r"application/(ld\+)?json")
 HASH_ZERO = 1631199000000
 HASHIDS = hashids.Hashids()
 
+
 def regex(x):
+    """
+    Returns x as a compiled regular expression
+    """
     if isinstance(x, str):
         return re.compile(x)
     return x
 
+
+def asbool(v, default=False):
+    """
+    Convert v to a boolean value
+    """
+    if isinstance(v, bool):
+        return v
+    try:
+        return bool(int(v))
+    except ValueError:
+        v = str(v).lower()
+        if v in ("true", "true", "yes", "ok"):
+            return True
+        if v in ("false", "no"):
+            return False
+    return default
+
+
 def getId():
+    """
+    Create a unique identifier
+    """
     time.sleep(0.001)
-    v = int(time.time()*1000)-HASH_ZERO
+    v = int(time.time() * 1000) - HASH_ZERO
     return HASHIDS.encode(v)
 
 
@@ -80,8 +105,8 @@ def parseDatetimeString(ds):
     return dt
 
 
-def parseContentType(content_type:str) -> [str,str]:
-    '''
+def parseContentType(content_type: str) -> [str, str]:
+    """
     Parse content-type header to media_type and charset
 
     Args:
@@ -89,7 +114,7 @@ def parseContentType(content_type:str) -> [str,str]:
 
     Returns:
         media-type, charset
-    '''
+    """
     if isinstance(content_type, bytes):
         content_type = content_type.decode("utf-8")
     content_type = content_type.strip()
@@ -99,38 +124,43 @@ def parseContentType(content_type:str) -> [str,str]:
     media_type = parts[0]
     charset = None
     if len(parts) > 1:
-        k,v = parts[1].strip().split("=")
+        k, v = parts[1].strip().split("=")
         if k.lower() == "charset":
             charset = v
     return media_type, charset
 
 
-def isText(media_type:str)->bool:
+def isText(media_type: str) -> bool:
     if TEXT_MEDIA.match(media_type) is not None:
         return True
     return False
 
-def isHtml(media_type:str)->bool:
+
+def isHtml(media_type: str) -> bool:
     if HTML_MEDIA.match(media_type) is not None:
         return True
     return False
 
-def isXml(media_type: str)->bool:
+
+def isXml(media_type: str) -> bool:
     if XML_MEDIA.match(media_type) is not None:
         return True
     return False
 
-def isJson(media_type: str)->bool:
+
+def isJson(media_type: str) -> bool:
     if JSON_MEDIA.match(media_type) is not None:
         return True
     return False
 
-def isJsonld(media_type: str)->bool:
+
+def isJsonld(media_type: str) -> bool:
     if JSONLD_MEDIA.match(media_type) is not None:
         return True
     return False
 
-def mediaKind(media_type:str)->[str]:
+
+def mediaKind(media_type: str) -> [str]:
     res = []
     if isText(media_type):
         res.append("text")
