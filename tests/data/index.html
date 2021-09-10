@@ -19,10 +19,10 @@
             let entries = [];
             for (let i=0; i < response.length; i++) {
                 let entry = {
-                    name: entries[i].name,
-                    href: `/${this_repository}/${entries[i].path}`,
-                    size: entries[i].size,
-                    repo: entries[i].html_url
+                    name: response[i].name,
+                    href: `/${this_repository}/${response[i].path}`,
+                    size: response[i].size,
+                    repo: response[i].html_url
                 }
                 entries.push(entry);
             }
