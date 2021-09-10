@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script>
+        const my_gh = "https://api.github.com/repos/datadavev";
+        const is_gh_host = window.location.origin === "https://datadavev.github.io";
+        const this_repository = window.location.pathname.split("/")[1];
+
+        function getContentUrl() {
+            return my_gh + window.location.pathname.split("/").slice(0,-1).join("/");
+        }
+
+        async function listContents() {
+            let response = await fetch(getContentUrl()).then(res => res.json());
+            let entries = [];
+            for (let i=0; i < len(response); i++) {
+                let entry = {
+                    name: entries[i].name,
+                    href: `/${this_repository}/${entries[i].path}`,
+                    size: entries[i].size,
+                    repo: entries[i].html_url
+                }
+                entries.push(entry);
+            }
+            return entries;
+        }
+    </script>
+</head>
+<body>
+<section>
+    <h1>Directory listing for <span id="this_folder"></span></h1>
+    <hr />
+    <ul id="contents"></ul>
+    <hr />
+</section>
+<script>
+    if (is_gh_host) {
+        let entries = listContents();
+        let ele = document.getElementById("contents")
+        for (let i=0; i<entries.length; i++) {
+            let nele = document.createElement("li");
+            nele.innerText = entries[i].name;
+            ele.appendChild(nele);
+        }
+    }
+</script>
+</body>
+</html>
