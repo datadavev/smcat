@@ -15,7 +15,7 @@
         async function listContents() {
             let response = await fetch(getContentUrl()).then(res => res.json());
             let entries = [];
-            for (let i=0; i < len(response); i++) {
+            for (let i=0; i < response.length; i++) {
                 let entry = {
                     name: entries[i].name,
                     href: `/${this_repository}/${entries[i].path}`,
