@@ -28,6 +28,17 @@
             }
             return entries;
         }
+
+        function renderContents(target) {
+            listContents().then( entries => {
+                let ele = document.getElementById(target);
+                for (let i=0; i<entries.length; i++) {
+                    let nele = document.createElement("li");
+                    nele.innerText = entries[i].name;
+                    ele.appendChild(nele);
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -39,13 +50,7 @@
 </section>
 <script>
     if (is_gh_host) {
-        let entries = await listContents();
-        let ele = document.getElementById("contents")
-        for (let i=0; i<entries.length; i++) {
-            let nele = document.createElement("li");
-            nele.innerText = entries[i].name;
-            ele.appendChild(nele);
-        }
+        renderContents();
     }
 </script>
 </body>
