@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <title>Index</title>
     <script>
-        const my_gh = "https://api.github.com/repos/datadavev";
-        const is_gh_host = window.location.origin === "https://datadavev.github.io";
+        const gh_api = "https://api.github.com/repos";
+        const my_gh = "datadavev";
+        const is_gh_host = window.location.origin === `https://${my_gh}.github.io`;
         const this_repository = window.location.pathname.split("/")[1];
 
         function getContentUrl() {
-            return my_gh + window.location.pathname.split("/").slice(0,-1).join("/");
+            let url = `${gh_api}/${my_gh}/${this_repository}/contents/`
+            return url + window.location.pathname.split("/").slice(2,-1).join("/");
         }
 
         async function listContents() {
