@@ -15,12 +15,13 @@
         }
     </script>
     <script src="common.js"></script>
+    <script src="show_jsonld.js" type="module"></script>
 </head>
 <body>
-<p>JSON-LD in this document:</p>
-<pre id="jsonld"></pre>
-<script>
-    addMetadata();
-</script>
+<show-jsonld id="abc"></show-jsonld>
+<!--
+<show-jsonld location="https://npdc.nl/dataset/247601fb-3c13-5cf7-8293-4bb6a4eb6782" use_proxy="true"></show-jsonld>
+<show-jsonld location="https://doi.pangaea.de/10.1594/PANGAEA.935531"></show-jsonld>
+-->
 </body>
 </html>
