@@ -8,10 +8,10 @@
         const my_gh = "datadavev";
         const is_gh_host = window.location.origin === `https://${my_gh}.github.io`;
         const this_repository = window.location.pathname.split("/")[1];
+        const this_folder = window.location.pathname.split("/").slice(2,-1).join("/");
 
         function getContentUrl() {
-            let url = `${gh_api}/${my_gh}/${this_repository}/contents/`
-            return url + window.location.pathname.split("/").slice(2,-1).join("/");
+            return `${gh_api}/${my_gh}/${this_repository}/contents/${this_folder}`;
         }
 
         async function listContents() {
