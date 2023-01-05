@@ -1,4 +1,5 @@
 import contextlib
+import sqlalchemy.orm
 import sqlmodel
 from . import sitemap
 
@@ -18,3 +19,29 @@ def get_session(engine):
         yield session
     finally:
         session.close()
+
+
+def mostRecentEntry(engine)->SitemapEntry:
+    """Get the most recent url entry
+    """
+    with get_session(engine) as session:
+        statement = (sqlmodel.select(SitemapEntry)
+                     .order_by(SitemapEntry.lastmod.desc()))
+        return session.exec(statement).first()
+
+
+def getSitemapRoots(engine):
+    with get_session(engine) as session:
+        statement = ("select distinct source from sitemapindex "
+                     "where source not in "
+                     "(select distinct loc from sitemapindex)")
+        return session.exec(statement).all()
+
+
+def changedSince(engine, dtlast):
+    with get_session(engine) as session:
+        statement = (sqlmodel.select(SitemapEntry)
+                     .where(SitemapEntry.lastmod > dtlast)
+                     .order_by(SitemapEntry.lastmod.desc()))
+        for entry in session.exec(statement):
+            yield entry
